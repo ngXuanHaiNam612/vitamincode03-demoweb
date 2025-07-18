@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: demo-web
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: system
+    password: root123
+    driver-class-name: oracle.jdbc.OracleDriver
+
+mybatis:
+  config-location: classpath:/static/mybatis/mybatis-config.xml
+  mapper-locations: classpath:/static/mybatis/mapper/*.xml
+
+server:
+  port: 1234
+
+
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vitamincode03.demoweb.mapper.ClassroomMapper">
+    <!-- Các phần tử SQL sẽ nằm ở đây -->
+    <resultMap id="ClassroomResultMap" type="com.vitamincode03.demoweb.entity.Classroom">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+
+    <select id="findAll" resultType="com.vitamincode03.demoweb.entity.Classroom">
+        SELECT * FROM CLASSROOM
+    </select>
+
+</mapper>
