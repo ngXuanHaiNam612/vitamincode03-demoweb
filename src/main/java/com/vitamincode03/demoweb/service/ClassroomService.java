@@ -2,28 +2,38 @@ package com.vitamincode03.demoweb.service;
 
 import com.vitamincode03.demoweb.entity.Classroom;
 import com.vitamincode03.demoweb.mapper.ClassroomMapper;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ClassroomService {
-    private ClassroomMapper classroomMapper;
 
-    public void findAll() {
-        try {
-            List<Classroom> list = classroomMapper.findAll();
-            System.out.println("=== Danh sách lớp học ===");
-            list.forEach(System.out::println);
-        }catch (Exception e) {
-            e.printStackTrace();
+    @Autowired
+    private final ClassroomMapper classroomMapper;
+
+    public void findAllClass(){
+        System.out.println("Danh sách lớp: ");
+        List<Classroom> resultList = classroomMapper.findAll();
+        for (Classroom classroom : resultList) {
+            System.out.println("+ " + classroom.getName());
         }
     }
 
+    public void findClassById(int id){
+        Classroom result = classroomMapper.findById(id);
+        System.out.println("+ " + result.getName());
+    }
 
+    public int insertClassroom(Classroom classroom) {
+        System.out.println("Insert " + classroom.getName());
+        classroomMapper.insert(classroom);
+        System.out.println("Successfully inserted " + classroom.getName());
+        return 0;
 
+    }
 
 }

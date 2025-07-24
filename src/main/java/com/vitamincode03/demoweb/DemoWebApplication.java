@@ -7,20 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoWebApplication implements CommandLineRunner {
-
-//    @Autowired
-    private ClassroomService classroomService;
-
-    public DemoWebApplication(ClassroomService classroomService) {
-        this.classroomService = classroomService;
-    }
-
+public class DemoWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoWebApplication.class, args);
-    }
-    @Override
-    public void run(String... args){
-        classroomService.findAll();
     }
 }
