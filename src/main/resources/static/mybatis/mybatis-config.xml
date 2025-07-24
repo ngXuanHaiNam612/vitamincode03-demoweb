@@ -4,5 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!-- Các phần cấu hình sẽ nằm bên trong đây -->
-
+    <typeAliases>
+        <typeAlias type="com.vitamincode03.demoweb.entity.Classroom" alias="Classroom"/>
+    </typeAliases>
 </configuration>

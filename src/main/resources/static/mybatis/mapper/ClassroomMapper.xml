@@ -5,15 +5,36 @@
 
 <mapper namespace="com.vitamincode03.demoweb.mapper.ClassroomMapper">
     <!-- Các phần tử SQL sẽ nằm ở đây -->
-    <resultMap id="ClassroomResultMap" type="com.vitamincode03.demoweb.entity.Classroom">
-        <id column="id" property="id"/>
+    <resultMap id="ClassroomResultMap" type="Classroom">
+        <id column="id" property="id" />
         <result column="name" property="name"/>
         <result column="description" property="description"/>
     </resultMap>
 
-
-    <select id="findAll" resultType="com.vitamincode03.demoweb.entity.Classroom">
-        SELECT * FROM CLASSROOM
+    <select id="findAll" resultMap="ClassroomResultMap">
+        SELECT id
+             , name
+             , description
+        FROM classroom
     </select>
+
+
+    <select id="findById" resultMap="ClassroomResultMap" parameterType="integer">
+        SELECT id
+             , name
+             , description
+        FROM classroom
+        WHERE id = #{classID}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO CLASSROOM (
+                                NAME
+                              , DESCRIPTION
+        ) VALUES (
+                   #{name}
+                 , #{description}
+                 )
+    </insert>
 
 </mapper>
