@@ -1,4 +1,4 @@
-package com.vitamincode03.demoweb.service;
+package com.vitamincode03.demoweb.service.impl;
 
 import com.vitamincode03.demoweb.entity.Classroom;
 import com.vitamincode03.demoweb.mapper.ClassroomMapper;

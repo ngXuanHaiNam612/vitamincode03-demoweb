@@ -1,8 +1,5 @@
 package com.vitamincode03.demoweb;
 
-import com.vitamincode03.demoweb.service.ClassroomService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
