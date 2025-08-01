@@ -18,19 +18,20 @@
             FROM Users
     </select>
 
-
     <select id="findByUsername" resultMap="UserResultMap">
         SELECT username
              , password
              , role
         FROM Users
-        WHERE username LIKE #{username}
-
+        <where>
+            <if test=" username != null and username != '' ">
+              username LIKE #{username}
+            </if>
+        </where>
     </select>
 
     <insert id="insert">
         INSERT INTO Users (username, password, role)
         VALUES (#{username}, #{password}, #{role});
     </insert>
-
 </mapper>

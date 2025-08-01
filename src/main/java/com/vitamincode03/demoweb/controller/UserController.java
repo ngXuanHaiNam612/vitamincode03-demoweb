@@ -3,7 +3,6 @@ package com.vitamincode03.demoweb.controller;
 import com.vitamincode03.demoweb.dto.request.UserDtoRequest;
 import com.vitamincode03.demoweb.dto.response.ApiResponse;
 import com.vitamincode03.demoweb.dto.response.UserDtoResponse;
-import com.vitamincode03.demoweb.entity.User;
 import com.vitamincode03.demoweb.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/get-by-username")
-    ApiResponse<?> doGetByUsername(@RequestParam("username") String username) {
+    ApiResponse<?> doGetByUsername(@RequestParam(name= "username", required = false) String username) {
         return ApiResponse.builder()
                 .statusCode(200)
                 .success(Boolean.TRUE)
