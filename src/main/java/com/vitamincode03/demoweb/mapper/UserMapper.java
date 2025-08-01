@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     public List<User> findAll();
-    public User findByUsername(@Param("username") String username);
+    public List<User> findByUsername(@Param("username") String username);
 
     public int insert(User user);
 }

@@ -9,7 +9,7 @@ public interface UserService {
 
     List<UserDtoResponse> findAll();
 
-    UserDtoResponse findByUsername(String username);
+    List<UserDtoResponse> findByUsername(String username);
 
     UserDtoResponse login(UserDtoRequest userDtoRequest);
 
