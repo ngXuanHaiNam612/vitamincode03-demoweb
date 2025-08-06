@@ -11,11 +11,19 @@
         <result column="role" property="role"/>
     </resultMap>
 
+    <update id="update">
+        UPDATE Users
+        SET username = #{username}
+          , password = #{password}
+          , role = #{role}
+        WHERE username = #{username}
+    </update>
+
     <select id="findAll" resultMap="UserResultMap">
         SELECT username
-                , password
-             , role
-            FROM Users
+            , password
+            , role
+        FROM Users
     </select>
 
     <select id="findByUsername" resultMap="UserResultMap">
@@ -30,8 +38,32 @@
         </where>
     </select>
 
+    <select id="findByUsernameList" resultMap="UserResultMap">
+        SELECT username
+        , password
+        , role
+        FROM Users
+        <where>
+            <if test=" usernameList != null and usernameList !='' ">
+                username IN 
+                <foreach collection="usernameList" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
     <insert id="insert">
         INSERT INTO Users (username, password, role)
-        VALUES (#{username}, #{password}, #{role});
+        VALUES (#{username}, #{password}, #{role})
+    </insert>
+
+    <insert id="insertList">
+    INSERT ALL
+            <foreach collection="list" item="item">
+                INTO Users (username, password, role) VALUES
+                (#{item.username}, #{item.password}, #{item.role})
+            </foreach>
+    SELECT * FROM DUAL
     </insert>
 </mapper>

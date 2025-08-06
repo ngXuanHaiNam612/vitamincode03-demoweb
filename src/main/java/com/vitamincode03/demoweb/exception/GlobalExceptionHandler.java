@@ -21,17 +21,17 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(value = BadSqlGrammarException.class)
-    ResponseEntity<ApiResponse> handleBadSqlGrammarException(BadSqlGrammarException e, HttpServletRequest request){
-        logError(e, request);
-        return ResponseEntity.badRequest().body(
-                ApiResponse.builder()
-                        .statusCode(ErrorCode.BAD_SQL.getCode())
-                        .success(Boolean.FALSE)
-                        .message(ErrorCode.BAD_SQL.getMessage())
-                        .build()
-        );
-    }
+//    @ExceptionHandler(value = BadSqlGrammarException.class)
+//    ResponseEntity<ApiResponse> handleBadSqlGrammarException(BadSqlGrammarException e, HttpServletRequest request){
+//        logError(e, request);
+//        return ResponseEntity.badRequest().body(
+//                ApiResponse.builder()
+//                        .statusCode(ErrorCode.BAD_SQL.getCode())
+//                        .success(Boolean.FALSE)
+//                        .message(ErrorCode.BAD_SQL.getMessage())
+//                        .build()
+//        );
+//    }
 
     @ExceptionHandler(value = NullPointerException.class)
     ResponseEntity<ApiResponse> handleNullPointerException(NullPointerException e, HttpServletRequest request){

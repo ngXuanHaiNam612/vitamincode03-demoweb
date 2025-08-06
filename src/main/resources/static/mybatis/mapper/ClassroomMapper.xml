@@ -18,7 +18,6 @@
         FROM classroom
     </select>
 
-
     <select id="findById" resultMap="ClassroomResultMap" parameterType="integer">
         SELECT id
              , name

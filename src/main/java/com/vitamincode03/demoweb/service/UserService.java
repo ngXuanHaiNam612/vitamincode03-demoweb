@@ -10,8 +10,12 @@ public interface UserService {
     List<UserDtoResponse> findAll();
 
     List<UserDtoResponse> findByUsername(String username);
-
+    List<UserDtoResponse> findByUsernameList(List<String> usernameList);
     UserDtoResponse login(UserDtoRequest userDtoRequest);
+
+    Integer insertList(List<UserDtoRequest> userDtoRequestList);
+    Integer save(UserDtoRequest userDtoRequest);
+
 
 
 }
