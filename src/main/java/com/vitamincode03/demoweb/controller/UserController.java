@@ -7,7 +7,6 @@ import com.vitamincode03.demoweb.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -37,6 +36,16 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("/get-list-user")
+    ApiResponse<?> doGetByUsernameList(@RequestBody List<String> usernameList) {
+        return ApiResponse.builder()
+                .statusCode(200)
+                .success(Boolean.TRUE)
+                .message("Gọi api thành công")
+                .data(userService.findByUsernameList(usernameList))
+                .build();
+    }
+
     @GetMapping("/login")
     ApiResponse<UserDtoResponse> doLogin(@RequestBody UserDtoRequest userDtoRequest) {
         return ApiResponse.<UserDtoResponse>builder()
@@ -44,6 +53,36 @@ public class UserController {
                 .success(Boolean.TRUE)
                 .message("Gọi api thành công")
                 .data(userService.login(userDtoRequest))
+                .build();
+    }
+
+    @PostMapping("/create-list")
+    ApiResponse<Integer> doCreateListUser(@RequestBody List<UserDtoRequest> userDtoRequestList) {
+        return ApiResponse.<Integer>builder()
+                .statusCode(200)
+                .success(Boolean.TRUE)
+                .message("Gọi api thành công")
+                .data(userService.insertList(userDtoRequestList))
+                .build();
+    }
+
+    @PostMapping("/save")
+    ApiResponse<Integer> doSaveUser(@RequestBody UserDtoRequest userDtoRequest) {
+        return ApiResponse.<Integer>builder()
+                .statusCode(200)
+                .success(Boolean.TRUE)
+                .message("Gọi api save thành công")
+                .data(userService.save(userDtoRequest))
+                .build();
+    }
+
+    @PostMapping("/save-list")
+    ApiResponse<Integer> doSaveListUser(@RequestBody List<UserDtoRequest> userDtoRequestList) {
+        return ApiResponse.<Integer>builder()
+                .statusCode(200)
+                .success(Boolean.TRUE)
+                .message("Gọi api save thành công")
+                .data(null)
                 .build();
     }
 }

@@ -43,6 +43,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDtoResponse> findByUsernameList(List<String> usernameList) {
+        var users = UserConvert.convertListUserToListUserDtoResponse(userMapper.findByUsernameList(usernameList));
+        if(!users.isEmpty()){
+            return users;
+        }else{
+            throw new AppException(ErrorCode.LIST_USER_NOT_FOUND);
+        }
+    }
+
+    @Override
     public UserDtoResponse login(UserDtoRequest userDtoRequest) {
         if(Objects.nonNull(userDtoRequest)){
             var user= userMapper.findByUsername(userDtoRequest.getUsername());
@@ -52,5 +62,26 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public Integer insertList(List<UserDtoRequest> userDtoRequestList) {
+        if(!userDtoRequestList.isEmpty()){
+            var entityList = UserConvert.convertListDtoRequestToListEntity(userDtoRequestList);
+            return userMapper.insertList(entityList);
+        }else{
+            throw new AppException(ErrorCode.LIST_USER_DTO_REQUEST_EMPTY);
+        }
+    }
+
+    @Override
+    public Integer save(UserDtoRequest userDtoRequest) {
+        var entity = UserConvert.convertDtoRequestToEntity(userDtoRequest);
+        if(userMapper.findByUsername(entity.getUsername()).isEmpty()){
+            return userMapper.insert(entity);
+        }else{
+            return userMapper.update(entity);
+        }
+    }
+
 
 }
