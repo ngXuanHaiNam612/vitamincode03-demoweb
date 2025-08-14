@@ -46,16 +46,6 @@ public class UserController {
                 .build();
     }
 
-    @GetMapping("/login")
-    ApiResponse<UserDtoResponse> doLogin(@RequestBody UserDtoRequest userDtoRequest) {
-        return ApiResponse.<UserDtoResponse>builder()
-                .statusCode(200)
-                .success(Boolean.TRUE)
-                .message("Gọi api thành công")
-                .data(userService.login(userDtoRequest))
-                .build();
-    }
-
     @PostMapping("/create-list")
     ApiResponse<Integer> doCreateListUser(@RequestBody List<UserDtoRequest> userDtoRequestList) {
         return ApiResponse.<Integer>builder()

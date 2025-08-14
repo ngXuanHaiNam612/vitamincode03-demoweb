@@ -18,7 +18,6 @@ public class ClassroomController {
     void doGetAllClassroom(){
         classroomService.findAllClass();
     }
-
     // path variable
     @GetMapping("/get-by-id-v1/{id}")
     void doGetClassroomById1(@PathVariable("id") int id){
