@@ -28,7 +28,6 @@ public class ClassroomController {
     void doGetClassroomById2(@RequestParam("idClassroom") int id){
         classroomService.findClassById(id);
     }
-
     @PostMapping()
     void createClassroom(@RequestBody Classroom classroom){
         classroomService.insertClassroom(classroom);

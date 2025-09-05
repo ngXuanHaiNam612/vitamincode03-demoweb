@@ -19,8 +19,39 @@
         WHERE username = #{username}
     </update>
 
+    <update id="saveList">
+        MERGE INTO users u
+        USING (
+        <foreach collection="list" item="user" separator="UNION ALL">
+            SELECT #{user.username} AS username,
+            #{user.password} AS password,
+            #{user.role}     AS role
+            FROM dual
+        </foreach>
+        ) src
+        ON (u.username = src.username)
+        WHEN MATCHED THEN
+        UPDATE SET u.password = src.password,
+        u.role     = src.role
+        WHEN NOT MATCHED THEN
+        INSERT (username, password, role)
+        VALUES (src.username, src.password, src.role)
+    </update>
+
+    <delete id="deleteList">
+        <if test="list != null and list.size() > 0">
+            DELETE FROM users
+                WHERE username IN
+            <foreach collection="list" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+
+    </delete>
+
     <select id="findAll" resultMap="UserResultMap">
-        SELECT username
+        SELECT -- UserMapper.findAll
+              username
             , password
             , role
         FROM Users
@@ -33,7 +64,7 @@
         FROM Users
         <where>
             <if test=" username != null and username != '' ">
-              username LIKE #{username}
+              username = #{username}
             </if>
         </where>
     </select>
@@ -66,4 +97,13 @@
             </foreach>
     SELECT * FROM DUAL
     </insert>
+
+    <select id="isExist" resultType="int">
+        SELECT CASE
+                   WHEN EXISTS (SELECT 1 FROM users WHERE username = #{username})
+                       THEN 1
+                   ELSE 0
+                   END AS user_exists
+        FROM dual
+    </select>
 </mapper>

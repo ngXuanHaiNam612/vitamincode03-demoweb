@@ -2,10 +2,17 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
     <!-- Các phần cấu hình sẽ nằm bên trong đây -->
     <typeAliases>
         <typeAlias type="com.vitamincode03.demoweb.entity.Classroom" alias="Classroom"/>
         <typeAlias type="com.vitamincode03.demoweb.entity.User" alias="User"/>
     </typeAliases>
+
+
 </configuration>

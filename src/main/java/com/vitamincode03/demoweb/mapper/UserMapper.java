@@ -14,5 +14,8 @@ public interface UserMapper {
     public Integer insert(User user);
     public Integer insertList (@Param("list")List<User> userList);
     public Integer update(User user);
+    public Integer saveList(@Param("list")List<User> userList);
+    public Integer deleteList(@Param("list")List<String> usernameList);
+    public Integer isExist(@Param("username") String username);
 
 }

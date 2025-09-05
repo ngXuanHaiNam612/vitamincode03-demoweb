@@ -17,21 +17,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     public void logError(Exception e, HttpServletRequest request) {
-        log.error("Lỗi call api: " + request.getRequestURI() + " với ERROR: " + e.getClass().getSimpleName());
+        log.error(">>> Fail to call api: " + request.getRequestURI() + " with ERROR: " + e.getClass().getSimpleName());
     }
 
-
-//    @ExceptionHandler(value = BadSqlGrammarException.class)
-//    ResponseEntity<ApiResponse> handleBadSqlGrammarException(BadSqlGrammarException e, HttpServletRequest request){
-//        logError(e, request);
-//        return ResponseEntity.badRequest().body(
-//                ApiResponse.builder()
-//                        .statusCode(ErrorCode.BAD_SQL.getCode())
-//                        .success(Boolean.FALSE)
-//                        .message(ErrorCode.BAD_SQL.getMessage())
-//                        .build()
-//        );
-//    }
+    @ExceptionHandler(value = BadSqlGrammarException.class)
+    ResponseEntity<ApiResponse> handleBadSqlGrammarException(BadSqlGrammarException e, HttpServletRequest request){
+        logError(e, request);
+        return ResponseEntity.badRequest().body(
+                ApiResponse.builder()
+                        .statusCode(ErrorCode.BAD_SQL.getCode())
+                        .success(Boolean.FALSE)
+                        .message(ErrorCode.BAD_SQL.getMessage())
+                        .build()
+        );
+    }
 
     @ExceptionHandler(value = NullPointerException.class)
     ResponseEntity<ApiResponse> handleNullPointerException(NullPointerException e, HttpServletRequest request){
@@ -52,7 +51,7 @@ public class GlobalExceptionHandler {
                 ApiResponse.builder()
                         .statusCode(ErrorCode.UNKNOWN_EXCEPTION.getCode())
                         .success(Boolean.FALSE)
-                        .message("Lỗi:" + e.getClass().getSimpleName())
+                        .message(">>>> Error:" + e.getClass().getSimpleName())
                         .build()
         );
     }
