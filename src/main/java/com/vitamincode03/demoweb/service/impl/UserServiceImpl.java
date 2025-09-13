@@ -1,6 +1,7 @@
 package com.vitamincode03.demoweb.service.impl;
 
 import com.vitamincode03.demoweb.convert.UserConvert;
+import com.vitamincode03.demoweb.dto.request.PageDtoRequest;
 import com.vitamincode03.demoweb.dto.request.UserDtoRequest;
 import com.vitamincode03.demoweb.dto.response.UserDtoResponse;
 import com.vitamincode03.demoweb.entity.User;
@@ -33,6 +34,31 @@ public class UserServiceImpl implements UserService {
             throw new AppException(ErrorCode.LIST_USER_NOT_FOUND);
         }
         return users;
+    }
+
+    @Override
+    public List<UserDtoResponse> search(PageDtoRequest pageDtoRequest) {
+       if(!Objects.isNull(pageDtoRequest)) {
+
+           if(pageDtoRequest.getPage() <= 0){
+               pageDtoRequest.setPage(1);
+           }
+
+           if(pageDtoRequest.getSize() <= 0){
+               pageDtoRequest.setPage(10);
+           }
+
+           int offset = pageDtoRequest.getOffset();
+           int limit = pageDtoRequest.getSize();
+           var listUser = UserConvert.convertListUserToListUserDtoResponse(
+                   userMapper.search(offset,limit));
+           if(listUser.isEmpty()) {
+                throw new AppException(ErrorCode.LIST_USER_NOT_FOUND);
+           }
+           return listUser;
+       }else{
+           throw new AppException(ErrorCode.LIST_REQUEST_EMPTY);
+       }
     }
 
     @Override
@@ -85,7 +111,7 @@ public class UserServiceImpl implements UserService {
             Integer rows = 0;
             if (!updateList.isEmpty()) {
                 log.info(">>>START UPDATING USER LIST");
-                for(User u : updateList){
+                for (User u : updateList) {
                     rows += userMapper.update(u);
                 }
             }

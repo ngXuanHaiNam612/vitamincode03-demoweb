@@ -12,7 +12,8 @@
     </resultMap>
 
     <update id="update">
-        UPDATE Users
+        --      UserMapper.update
+         UPDATE Users
         SET username = #{username}
           , password = #{password}
           , role = #{role}
@@ -20,25 +21,27 @@
     </update>
 
     <update id="saveList">
+        --      UserMapper.saveList
         MERGE INTO users u
         USING (
-        <foreach collection="list" item="user" separator="UNION ALL">
-            SELECT #{user.username} AS username,
-            #{user.password} AS password,
-            #{user.role}     AS role
-            FROM dual
-        </foreach>
+            <foreach collection="list" item="user" separator="UNION ALL">
+                SELECT #{user.username} AS username,
+                #{user.password} AS password,
+                #{user.role}     AS role
+                FROM dual
+            </foreach>
         ) src
         ON (u.username = src.username)
         WHEN MATCHED THEN
         UPDATE SET u.password = src.password,
-        u.role     = src.role
+                   u.role     = src.role
         WHEN NOT MATCHED THEN
         INSERT (username, password, role)
         VALUES (src.username, src.password, src.role)
     </update>
 
     <delete id="deleteList">
+        --      UserMapper.deleteList
         <if test="list != null and list.size() > 0">
             DELETE FROM users
                 WHERE username IN
@@ -50,7 +53,8 @@
     </delete>
 
     <select id="findAll" resultMap="UserResultMap">
-        SELECT -- UserMapper.findAll
+        --      UserMapper.findAll
+        SELECT
               username
             , password
             , role
@@ -58,6 +62,7 @@
     </select>
 
     <select id="findByUsername" resultMap="UserResultMap">
+        --      UserMapper.findByUsername
         SELECT username
              , password
              , role
@@ -70,6 +75,7 @@
     </select>
 
     <select id="findByUsernameList" resultMap="UserResultMap">
+        --      UserMapper.findByUsernameList
         SELECT username
         , password
         , role
@@ -85,20 +91,23 @@
     </select>
 
     <insert id="insert">
+        --      UserMapper.insert
         INSERT INTO Users (username, password, role)
         VALUES (#{username}, #{password}, #{role})
     </insert>
 
     <insert id="insertList">
-    INSERT ALL
-            <foreach collection="list" item="item">
-                INTO Users (username, password, role) VALUES
-                (#{item.username}, #{item.password}, #{item.role})
-            </foreach>
-    SELECT * FROM DUAL
+        --      UserMapper.insertList
+        INSERT ALL
+                <foreach collection="list" item="item">
+                    INTO Users (username, password, role) VALUES
+                    (#{item.username}, #{item.password}, #{item.role})
+                </foreach>
+        SELECT * FROM DUAL
     </insert>
 
     <select id="isExist" resultType="int">
+        --      UserMapper.isExist
         SELECT CASE
                    WHEN EXISTS (SELECT 1 FROM users WHERE username = #{username})
                        THEN 1
@@ -106,4 +115,15 @@
                    END AS user_exists
         FROM dual
     </select>
+
+    <select id="search" resultType="com.vitamincode03.demoweb.entity.User">
+        --      UserMapper.search
+        SELECT
+            username
+             , password
+             , role
+        FROM Users
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
 </mapper>

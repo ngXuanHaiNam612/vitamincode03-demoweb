@@ -2,10 +2,14 @@ spring:
   application:
     name: demo-web
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    username: system
+#    url: jdbc:oracle:thin:@localhost:1521:xe
+#    username: system
+#    password: root123
+#    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:mysql://localhost:3306/vtmc03
+    username: root
     password: root123
-    driver-class-name: oracle.jdbc.OracleDriver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   config-location: classpath:/static/mybatis/mybatis-config.xml
   mapper-locations: classpath:/static/mybatis/mapper/*.xml

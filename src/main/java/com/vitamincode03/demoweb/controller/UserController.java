@@ -1,6 +1,7 @@
 package com.vitamincode03.demoweb.controller;
 
 import com.vitamincode03.demoweb.common.ApiConstraints;
+import com.vitamincode03.demoweb.dto.request.PageDtoRequest;
 import com.vitamincode03.demoweb.dto.request.UserDtoRequest;
 import com.vitamincode03.demoweb.dto.response.ApiResponse;
 import com.vitamincode03.demoweb.service.impl.UserServiceImpl;
@@ -14,8 +15,10 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class UserController {
+
     @Autowired
     private final UserServiceImpl userService;
+
 
     @GetMapping(ApiConstraints.ApiUser.GET_ALL_USER)
     ApiResponse<?> doGetAllUser() {
@@ -24,6 +27,16 @@ public class UserController {
                 .success(Boolean.TRUE)
                 .message("Call API Success")
                 .data(userService.findAll())
+                .build();
+    }
+
+    @GetMapping(ApiConstraints.ApiUser.SEARCH)
+    ApiResponse<?> doSearchUser(@RequestBody PageDtoRequest pageDtoRequest) {
+        return ApiResponse.builder()
+                .statusCode(200)
+                .success(Boolean.TRUE)
+                .message("Call API Success")
+                .data(userService.search(pageDtoRequest))
                 .build();
     }
 
