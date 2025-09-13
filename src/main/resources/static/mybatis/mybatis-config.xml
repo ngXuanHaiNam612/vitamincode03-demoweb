@@ -13,6 +13,4 @@
         <typeAlias type="com.vitamincode03.demoweb.entity.Classroom" alias="Classroom"/>
         <typeAlias type="com.vitamincode03.demoweb.entity.User" alias="User"/>
     </typeAliases>
-
-
 </configuration>

@@ -1,5 +1,6 @@
 package com.vitamincode03.demoweb.service;
 
+import com.vitamincode03.demoweb.dto.request.PageDtoRequest;
 import com.vitamincode03.demoweb.dto.request.UserDtoRequest;
 import com.vitamincode03.demoweb.dto.response.UserDtoResponse;
 
@@ -8,6 +9,8 @@ import java.util.List;
 public interface UserService {
     // Tìm tất cả user
     List<UserDtoResponse> findAll();
+    // Tìm tất cả user
+    List<UserDtoResponse> search(PageDtoRequest pageDtoRequest);
     // Tìm user theo usernamme
     UserDtoResponse findByUsername(String username);
     // Tìm danh sách user theo username

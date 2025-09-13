@@ -14,11 +14,13 @@ import lombok.Getter;
 
   CUSTOM:
       1xxx (1000 - 1999): User features errors
+      2xxx (2000 - 2999)): Classroom features errors
  */
 public enum ErrorCode {
 
     INCORRECT_PASSWORD(401 , "Wrong password"),
     LIST_REQUEST_EMPTY(405, "Null request"),
+    UNKNOWN_EXCEPTION(500, ""),
 
 
     // define Error Code
@@ -28,7 +30,6 @@ public enum ErrorCode {
     BAD_SQL(500 , "Bad SQL"),
     NULL_POINTER(500 , "Null Pointer"),
 
-    UNKNOWN_EXCEPTION(500, "")
     ;
 
     //properties

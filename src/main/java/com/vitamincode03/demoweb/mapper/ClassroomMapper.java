@@ -10,6 +10,5 @@ import java.util.List;
 public interface ClassroomMapper {
     public List<Classroom> findAll();
     public Classroom findById(@Param("classID") int id);
-
     public int insert(Classroom classroom);
 }

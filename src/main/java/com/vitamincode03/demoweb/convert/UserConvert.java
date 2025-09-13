@@ -4,8 +4,8 @@ import com.vitamincode03.demoweb.dto.request.UserDtoRequest;
 import com.vitamincode03.demoweb.dto.response.UserDtoResponse;
 import com.vitamincode03.demoweb.entity.User;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 public class UserConvert {
 
@@ -23,7 +23,6 @@ public class UserConvert {
                 .toList();
     }
 
-
     public static User convertDtoRequestToEntity(UserDtoRequest dtoRequest) {
         return User.builder()
                 .username(dtoRequest.getUsername())
@@ -38,7 +37,4 @@ public class UserConvert {
                 .map(UserConvert::convertDtoRequestToEntity)
                 .toList();
     }
-
-
-
 }

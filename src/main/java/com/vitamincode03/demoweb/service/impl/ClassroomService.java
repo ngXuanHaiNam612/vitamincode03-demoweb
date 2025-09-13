@@ -2,6 +2,7 @@ package com.vitamincode03.demoweb.service.impl;
 
 import com.vitamincode03.demoweb.entity.Classroom;
 import com.vitamincode03.demoweb.mapper.ClassroomMapper;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClassroomService {
 
-    @Autowired
     private final ClassroomMapper classroomMapper;
 
     public void findAllClass(){

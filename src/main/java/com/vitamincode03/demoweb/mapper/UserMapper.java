@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     public List<User> findAll();
+    public List<User> search(@Param("offset") int offset, @Param("limit") int limit);
     public List<User> findByUsername(@Param("username") String username);
     public List<User> findByUsernameList(@Param("usernameList") List<String> usernameList);
     public Integer insert(User user);
